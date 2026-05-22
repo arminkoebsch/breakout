@@ -1,25 +1,34 @@
-void game(){
+void game() {
   fill(150, 50);
   rect(0, 0, width, height);
-  
+
   //paddle
   fill(255);
   circle(px, height, pd);
-  
+
   //paddles move
   if (dkey == true && px < width-pd/2) px = px + 5;
-  //if (skey == true && ly < height-rd/2) ly = ly + 5;
-  
+  if (akey == true && px > 0+pd/2)px = px - 5;
+
   //ball
   fill(255);
   circle(bx, by, bd);
-  
+
   //ball move
   if (timer < 0) {
     bx = bx + vx;
     by = by + vy;
   }
   
+  //ball direction fix
+  if (vx == 0) {
+    vx = vx + random(1, -1);
+  }
+  
+  if (vy == 0) {
+    vy = vy + random(1, -1);
+  }
+
   //bouncing
   if (bx < 0 + bd/2 || bx > width - bd/2) {
     vx = vx * -1;
@@ -27,19 +36,38 @@ void game(){
   if (by < 0 + bd/2 || by > height - bd/2) {
     vy = vy * -1;
   }
-  
-  
-  
-  
-  
-  
-  
-  
+
+  //paddle bouncing
+  if (dist(px, 1000, bx, by)*2 <= pd + bd) {
+    vx = (bx - px)/5;
+    vy = (by - 1000)/5;
+  }
+
+  //bricks
+  int i = 0;
+  while (i < n) {
+    if (alive[i] == true) {
+      manageBricks(i);
+    }
+    i++;
+  }
+
+
+
+
   //timer
   timer = timer - 1;
-  
 }
 
-void gameClicks(){
-  
+void gameClicks() {
+}
+
+void manageBricks(int i) {
+  circle(x[i], y[i], brickd);
+
+  if (dist(bx, by, x[i], y[i])*2 <= bd + brickd) {
+    vx = ((bx - x[i]))/2;
+    vy = (by - y[i])/2;
+    alive[i] = false;
+  }
 }
