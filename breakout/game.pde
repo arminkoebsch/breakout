@@ -1,4 +1,7 @@
 void game() {
+
+  theme.play();
+
   fill(150, 50);
   rect(0, 0, width, height);
 
@@ -7,8 +10,8 @@ void game() {
   circle(px, height, pd);
 
   //paddles move
-  if (dkey == true && px < width-pd/2) px = px + 5;
-  if (akey == true && px > 0+pd/2)px = px - 5;
+  if (dkey == true && px < width-pd/2) px = px + 8;
+  if (akey == true && px > 0+pd/2)px = px - 8;
 
   //ball
   fill(255);
@@ -19,12 +22,12 @@ void game() {
     bx = bx + vx;
     by = by + vy;
   }
-  
+
   //ball direction fix
   if (vx == 0) {
     vx = vx + random(1, -1);
   }
-  
+
   if (vy == 0) {
     vy = vy + random(1, -1);
   }
@@ -33,7 +36,7 @@ void game() {
   if (bx < 0 + bd/2 || bx > width - bd/2) {
     vx = vx * -1;
   }
-  if (by < 0 + bd/2 || by > height - bd/2) {
+  if (by < 0 + bd/2) {
     vy = vy * -1;
   }
 
@@ -41,6 +44,7 @@ void game() {
   if (dist(px, 1000, bx, by)*2 <= pd + bd) {
     vx = (bx - px)/5;
     vy = (by - 1000)/5;
+    score++;
   }
 
   //bricks
@@ -52,12 +56,51 @@ void game() {
     i++;
   }
 
+  //Gameover
+  if (by > height - bd/2) {
+    bx = 500;
+    by = 600;
+    bd = 10;
+    vx = 1;
+    vy = 5;
 
+    timer = 100;
+    score = 0;
+
+    theme.rewind();
+
+    i = 0;
+    while (i < n) {
+      alive[i] = true;
+      i++;
+    }
+  }
+
+  //score
+  textAlign(CENTER, CENTER);
+  fill(0);
+  textSize(30);
+  text("score : " + score, 100, 900);
 
 
   //timer
   timer = timer - 1;
+
+  //wining
+  int c = 0;
+  i = 0;
+  while (i < n) {
+    if (alive[i] == true) {
+    c++;
+    }
+    i++;
+  }
+  if (c == 0) {
+    
+    mode = gameover;
+  }
 }
+
 
 void gameClicks() {
 }

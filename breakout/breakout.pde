@@ -1,3 +1,21 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+Minim minim;
+
+AudioPlayer theme;
+
 
 //bricks
 int [] x;
@@ -26,16 +44,18 @@ int timer = 100;
 boolean dkey = false;
 boolean akey = false;
 
+int score;
+
 
 void setup(){
   mode = game;
   size(1000, 1000);
   
   bx = 500;
-  by = 900;
+  by = 600;
   bd = 10;
-  vx = 0;
-  vy = 10;
+  vx = 1;
+  vy = 5;
   
   px = 500;
   pd = 100;
@@ -63,6 +83,9 @@ void setup(){
     }
     i++;
   }
+  
+  minim = new Minim(this);
+  theme = minim.loadFile("Theme.mp3");
 }
 
 
