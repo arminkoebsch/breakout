@@ -48,7 +48,8 @@ int score;
 
 
 void setup(){
-  mode = game;
+  textAlign(CENTER, CENTER);
+  mode = intro;
   size(1000, 1000);
   
   bx = 500;

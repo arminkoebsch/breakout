@@ -77,7 +77,7 @@ void game() {
   }
 
   //score
-  textAlign(CENTER, CENTER);
+  
   fill(0);
   textSize(30);
   text("score : " + score, 100, 900);
@@ -86,19 +86,8 @@ void game() {
   //timer
   timer = timer - 1;
 
-  //wining
-  int c = 0;
-  i = 0;
-  while (i < n) {
-    if (alive[i] == true) {
-    c++;
-    }
-    i++;
-  }
-  if (c == 0) {
-    
-    mode = gameover;
-  }
+  
+  
 }
 
 
@@ -112,5 +101,19 @@ void manageBricks(int i) {
     vx = ((bx - x[i]))/2;
     vy = (by - y[i])/2;
     alive[i] = false;
+  }
+  
+  //wining
+  int c = 0;
+  i = 0;
+  while (i < n) {
+    if (alive[i] == true) {
+    c++;
+    }
+    i++;
+  }
+  if (c == 0) {
+    
+    mode = gameover;
   }
 }
