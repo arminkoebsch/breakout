@@ -48,6 +48,7 @@ int score;
 
 
 void setup(){
+  noStroke();
   textAlign(CENTER, CENTER);
   mode = intro;
   size(1000, 1000);
@@ -86,7 +87,7 @@ void setup(){
   }
   
   minim = new Minim(this);
-  theme = minim.loadFile("Theme.mp3");
+  theme = minim.loadFile("sound.mp3");
 }
 
 
