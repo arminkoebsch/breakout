@@ -16,6 +16,9 @@ Minim minim;
 
 AudioPlayer theme;
 
+PImage[] gif;
+int numberOfFrames;
+int f = 0;
 
 //bricks
 int [] x;
@@ -48,6 +51,16 @@ int score;
 
 
 void setup(){
+  
+  numberOfFrames = 23;
+  gif = new PImage[23];
+  
+  int i = 0;
+  while (i < numberOfFrames) {
+    gif[i] = loadImage("ezgif-split/frame_"+i+"_delay-0.05s.gif");
+    i++;
+  }
+  
   noStroke();
   textAlign(CENTER, CENTER);
   mode = intro;
@@ -73,7 +86,7 @@ void setup(){
   tempy = 100;
   
   
-  int i = 0;
+  i = 0;
   while (i < n) {
     x[i] = tempx;
     y[i] = tempy;

@@ -1,5 +1,11 @@
 void intro() {
   background(0);
+  
+  image(gif[f], 0, 0, width, height);
+  f++;
+  if (f == numberOfFrames){
+    f = 0;
+  }
 
   textSize(100);
   fill(0, 255, 0);
